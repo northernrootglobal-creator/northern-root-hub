@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Northern Root</title>
+<style>
+  :root{
+    --night-950:#080d1c; --night-900:#0d1428; --night-800:#151d38;
+    --night-700:#22304f; --ink:#eaf0ff; --muted:#9fb0d0; --faint:#6b7ba0;
+    --brass:#f0ad3c; --brass-200:#f6c66e; --aurora:#3ad6c0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;
+    color:var(--ink); background:var(--night-950);
+    background-image:
+      radial-gradient(1100px 520px at 78% -8%, rgba(240,173,60,.16), transparent 60%),
+      radial-gradient(900px 520px at 12% 108%, rgba(58,214,192,.13), transparent 60%);
+    min-height:100%; display:flex; flex-direction:column;
+  }
+  .wrap{width:100%; max-width:1000px; margin:0 auto; padding:56px 22px 40px; flex:1;
+        display:flex; flex-direction:column;}
+  header{text-align:center}
+  .mark{width:96px;height:96px;object-fit:contain;margin:0 auto;display:block;
+        filter:drop-shadow(0 6px 22px rgba(0,0,0,.5))}
+  .word{margin-top:16px;font-size:clamp(30px,6vw,48px);font-weight:800;letter-spacing:.14em}
+  .word span{color:var(--brass-200)}
+  .tag{margin-top:8px;color:var(--brass-200);font-size:13px;letter-spacing:.36em;
+       text-transform:uppercase;font-weight:700}
+  .sub{margin-top:20px;color:var(--muted);font-size:17px}
+  .grid{margin-top:38px;display:grid;gap:16px;grid-template-columns:repeat(2,1fr)}
+  @media (max-width:640px){.grid{grid-template-columns:1fr}}
+  .card{position:relative;display:flex;gap:16px;align-items:center;
+    background:linear-gradient(180deg,var(--night-900),var(--night-950));
+    border:1px solid var(--night-700);border-radius:20px;padding:22px 22px;
+    text-decoration:none;color:var(--ink);transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease}
+  .card:hover{transform:translateY(-3px);border-color:var(--brass);box-shadow:0 14px 34px rgba(0,0,0,.4)}
+  .ico{flex:none;width:58px;height:58px;border-radius:15px;display:grid;place-items:center;
+    font-size:28px;background:rgba(240,173,60,.12);border:1px solid rgba(240,173,60,.28)}
+  .card.aur .ico{background:rgba(58,214,192,.12);border-color:rgba(58,214,192,.30)}
+  .ctext{flex:1;min-width:0}
+  .ctitle{font-size:20px;font-weight:750}
+  .cdesc{margin-top:3px;color:var(--muted);font-size:14px;line-height:1.4}
+  .go{flex:none;color:var(--brass-200);font-weight:800;font-size:20px}
+  .badge{position:absolute;top:14px;right:16px;font-size:10px;font-weight:800;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--aurora);background:rgba(58,214,192,.12);
+    border:1px solid rgba(58,214,192,.3);border-radius:999px;padding:3px 9px}
+  footer{margin-top:34px;text-align:center;color:var(--faint);font-size:13px;line-height:1.6}
+  footer a{color:var(--muted);text-decoration:none}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img class="mark" alt="Northern Root" src="data:image/png;base64,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" />
+      <div class="word">NORTHERN <span>ROOT</span></div>
+      <div class="tag">Know your true north</div>
+      <p class="sub">Choose where you're headed.</p>
+    </header>
+
+    <main class="grid">
+      <a class="card" href="https://northern-root-records-music-studios.vercel.app">
+        <div class="ico">🎵</div>
+        <div class="ctext">
+          <div class="ctitle">Music Studios</div>
+          <div class="cdesc">Lessons, memberships &amp; recording — all instruments, all ages.</div>
+        </div>
+        <div class="go">→</div>
+      </a>
+
+      <a class="card aur" href="https://nr-flight-academy.vercel.app">
+        <div class="ico">✈️</div>
+        <div class="ctext">
+          <div class="ctitle">Flight Academy</div>
+          <div class="cdesc">Flight-simulator training and Pilot-for-a-Day experiences.</div>
+        </div>
+        <div class="go">→</div>
+      </a>
+
+      <a class="card" href="https://northernroot-one.vercel.app">
+        <span class="badge">Students only</span>
+        <div class="ico">⭐</div>
+        <div class="ctext">
+          <div class="ctitle">Northern Root ONE</div>
+          <div class="cdesc">The exclusive portal for enrolled students.</div>
+        </div>
+        <div class="go">→</div>
+      </a>
+
+      <a class="card aur" href="https://nr-merch.vercel.app">
+        <div class="ico">🧢</div>
+        <div class="ctext">
+          <div class="ctitle">Merch</div>
+          <div class="cdesc">Official Northern Root apparel &amp; gear.</div>
+        </div>
+        <div class="go">→</div>
+      </a>
+    </main>
+
+    <footer>
+      3rd Floor, Lighthouse Cooperative Bldg, Bagay Road, Caritan Centro, Tuguegarao City, Cagayan<br/>
+      &copy; Northern Root · Records &amp; Music Studios · Flight Simulator Studio
+    </footer>
+  </div>
+</body>
+</html>
