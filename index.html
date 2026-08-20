@@ -68,6 +68,63 @@
     text-transform:uppercase;font-family:var(--display);color:var(--neon);background:rgba(42,245,255,.1);
     border:1px solid rgba(42,245,255,.32);border-radius:999px;padding:3px 10px}
   .badge-wip{color:var(--orange-200);background:rgba(255,106,26,.1);border-color:rgba(255,106,26,.34)}
+  /* ---------- Hero: Northern Heart, Global Pulse ---------- */
+  .hero{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center;
+    min-height:clamp(500px,78vh,740px);padding:20px 0 6px;overflow:hidden}
+  @media (max-width:820px){.hero{grid-template-columns:1fr;text-align:center;min-height:auto;padding-top:6px}}
+  .starfield{position:absolute;inset:0;pointer-events:none;opacity:.7;animation:twinkle 6s ease-in-out infinite;
+    background:
+      radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,.7), transparent 60%),
+      radial-gradient(1.5px 1.5px at 70% 18%, rgba(42,245,255,.6), transparent 60%),
+      radial-gradient(1.5px 1.5px at 85% 60%, rgba(255,255,255,.5), transparent 60%),
+      radial-gradient(1.5px 1.5px at 33% 76%, rgba(255,180,80,.55), transparent 60%),
+      radial-gradient(2px 2px at 52% 44%, rgba(255,255,255,.5), transparent 60%),
+      radial-gradient(1px 1px at 12% 60%, rgba(255,255,255,.5), transparent 60%),
+      radial-gradient(1px 1px at 62% 82%, rgba(255,255,255,.45), transparent 60%),
+      radial-gradient(1px 1px at 44% 12%, rgba(42,245,255,.5), transparent 60%)}
+  @keyframes twinkle{0%,100%{opacity:.55}50%{opacity:.9}}
+  .hero-copy{position:relative;z-index:2;max-width:560px}
+  @media (max-width:820px){.hero-copy{margin:0 auto;order:2}}
+  .hero .mark{width:60px;height:60px;margin:0 0 18px}
+  @media (max-width:820px){.hero .mark{margin:0 auto 14px}}
+  .eyebrow{font-family:var(--display);font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--neon);font-weight:600;margin-bottom:16px}
+  h1.word{font-family:var(--display);font-weight:800;font-size:clamp(38px,6.2vw,64px);line-height:1.02;letter-spacing:-.01em;margin:0}
+  h1.word span{color:var(--orange)}
+  .hero .sub{margin-top:16px;color:var(--muted);font-size:clamp(15px,1.5vw,18px);max-width:46ch;line-height:1.5}
+  @media (max-width:820px){.hero .sub{margin-left:auto;margin-right:auto}}
+  .cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+  @media (max-width:820px){.cta{justify-content:center}}
+  .btn{display:inline-flex;align-items:center;min-height:46px;padding:0 20px;border-radius:12px;font-family:var(--display);font-weight:700;font-size:14px;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease,color .15s ease}
+  .btn-primary{background:linear-gradient(120deg,var(--orange),#ffb454);color:#0a0a0d;box-shadow:0 12px 32px -12px rgba(255,106,26,.75)}
+  .btn-primary:hover{transform:translateY(-2px)}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--neon);color:var(--neon)}
+  .hero-stage{position:relative;z-index:1;display:grid;place-items:center;min-height:340px}
+  @media (max-width:820px){.hero-stage{order:1;min-height:300px;margin-bottom:4px}}
+  .globe-wrap{position:relative;width:min(440px,84vw);aspect-ratio:1}
+  .globe-glow{position:absolute;inset:-14%;border-radius:50%;filter:blur(8px);
+    background:radial-gradient(circle at 50% 50%, rgba(42,245,255,.22), rgba(255,106,26,.12) 42%, transparent 66%)}
+  .globe-svg{position:relative;width:100%;height:100%;display:block}
+  .spin{transform-origin:200px 200px;animation:spin 46s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .arc{stroke-dasharray:6 250;stroke-dashoffset:256;animation:travel 3.4s linear infinite}
+  .arc.a2{animation-duration:4.2s;animation-delay:.6s}
+  .arc.a3{animation-duration:3.8s;animation-delay:1.2s}
+  .arc.a4{animation-duration:4.6s;animation-delay:1.8s}
+  @keyframes travel{to{stroke-dashoffset:0}}
+  .ph-pulse{animation:phpulse 2.6s ease-out infinite}
+  @keyframes phpulse{0%{r:4;opacity:.85}100%{r:28;opacity:0}}
+  .compass{position:absolute;top:4%;right:0;width:74px;height:74px}
+  @media (max-width:820px){.compass{width:58px;height:58px}}
+  .needle{transform-origin:37px 37px;animation:settle 7s ease-in-out infinite}
+  @keyframes settle{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(5deg)}}
+  @media (prefers-reduced-motion:reduce){
+    .spin,.ph-pulse,.needle,.starfield{animation:none}
+    .arc{animation:none;stroke-dasharray:none;stroke-dashoffset:0}
+  }
+  .dest{margin-top:6px}
+  .dest-eyebrow{font-family:var(--display);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin:0 0 16px}
+  .dest-eyebrow .dot{color:var(--orange)}
   footer{margin-top:36px;text-align:center;color:var(--faint);font-size:13px;line-height:1.6}
   footer a{color:var(--muted);text-decoration:none}
   @media (prefers-reduced-motion:reduce){.card{transition:border-color .18s ease}.card:hover{transform:none}}
@@ -75,14 +132,77 @@
 </head>
 <body>
   <div class="wrap">
-    <header>
+    <section class="hero">
+     <div class="starfield" aria-hidden="true"></div>
+     <div class="hero-copy">
       <img class="mark" alt="Northern Root" src="data:image/png;base64,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" />
-      <div class="word">NORTHERN <span>ROOT</span></div>
-      <div class="tag">Know your true north</div>
-      <p class="sub">Choose where you're headed.</p>
-    </header>
+      <p class="eyebrow">Northern Root Worldwide · Northern Heart, Global Pulse</p>
+      <h1 class="word">Know Your <span>True North</span></h1>
+      <p class="sub">From the Philippines to the world — one purpose-driven global brand, sending its pulse across the map.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#destinations">Explore Northern Root</a>
+        <a class="btn btn-ghost" href="https://records.northernroot.app">Enter the studios</a>
+      </div>
+     </div>
 
-    <main class="grid">
+     <div class="hero-stage" aria-hidden="true">
+      <div class="globe-wrap">
+       <div class="globe-glow"></div>
+       <svg class="globe-svg" viewBox="0 0 400 400" fill="none">
+        <defs>
+         <radialGradient id="gSphere" cx="42%" cy="38%" r="72%">
+          <stop offset="0%" stop-color="#123038"/>
+          <stop offset="55%" stop-color="#0c1a20"/>
+          <stop offset="100%" stop-color="#07070b"/>
+         </radialGradient>
+         <linearGradient id="gArc" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ff6a1a"/>
+          <stop offset="100%" stop-color="#2af5ff"/>
+         </linearGradient>
+         <radialGradient id="gPh" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ffd27a"/>
+          <stop offset="100%" stop-color="#ff6a1a"/>
+         </radialGradient>
+        </defs>
+        <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(42,245,255,.16)" stroke-width="12" opacity=".5"/>
+        <circle cx="200" cy="200" r="150" fill="url(#gSphere)" stroke="rgba(42,245,255,.3)" stroke-width="1.2"/>
+        <g class="spin" fill="none" stroke="rgba(255,150,70,.32)" stroke-width="1">
+         <ellipse cx="200" cy="200" rx="150" ry="46"/>
+         <ellipse cx="200" cy="200" rx="150" ry="98"/>
+         <line x1="50" y1="200" x2="350" y2="200"/>
+         <ellipse cx="200" cy="200" rx="46" ry="150" stroke="rgba(42,245,255,.28)"/>
+         <ellipse cx="200" cy="200" rx="98" ry="150" stroke="rgba(42,245,255,.24)"/>
+         <line x1="200" y1="50" x2="200" y2="350" stroke="rgba(42,245,255,.28)"/>
+        </g>
+        <g fill="none" stroke="url(#gArc)" stroke-width="2" stroke-linecap="round">
+         <path class="arc" d="M250 232 C 210 150, 150 150, 120 176"/>
+         <path class="arc a2" d="M250 232 C 300 190, 322 150, 300 120"/>
+         <path class="arc a3" d="M250 232 C 220 272, 170 300, 132 292"/>
+         <path class="arc a4" d="M250 232 C 300 250, 332 250, 330 210"/>
+        </g>
+        <g fill="#2af5ff">
+         <circle cx="120" cy="176" r="3"/><circle cx="300" cy="120" r="3"/>
+         <circle cx="132" cy="292" r="3"/><circle cx="330" cy="210" r="3"/>
+        </g>
+        <circle class="ph-pulse" cx="250" cy="232" r="4" fill="url(#gPh)"/>
+        <circle cx="250" cy="232" r="5" fill="#ffd27a"/>
+       </svg>
+       <svg class="compass" viewBox="0 0 74 74" fill="none">
+        <circle cx="37" cy="37" r="34" stroke="rgba(255,255,255,.18)" stroke-width="1.4"/>
+        <circle cx="37" cy="37" r="27" stroke="rgba(42,245,255,.25)" stroke-width="1"/>
+        <g class="needle">
+         <path d="M37 12 L43 37 L37 33 L31 37 Z" fill="#ff6a1a"/>
+         <path d="M37 62 L31 37 L37 41 L43 37 Z" fill="rgba(255,255,255,.55)"/>
+        </g>
+        <text x="37" y="10" text-anchor="middle" font-size="9" fill="#ffd27a" font-family="sans-serif" font-weight="700">N</text>
+       </svg>
+      </div>
+     </div>
+    </section>
+
+    <section id="destinations" class="dest">
+      <p class="dest-eyebrow"><span class="dot">◤</span> Choose where you're headed</p>
+      <main class="grid">
       <a class="card" href="https://music.northernroot.app">
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
         <div class="ctext">
@@ -130,6 +250,7 @@
         <div class="go">→</div>
       </a>
     </main>
+    </section>
 
     <footer>
       3rd Floor, Lighthouse Cooperative Bldg, Bagay Road, Caritan Centro, Tuguegarao City, Cagayan<br/>
