@@ -122,6 +122,13 @@
     .spin,.ph-pulse,.needle,.starfield{animation:none}
     .arc{animation:none;stroke-dasharray:none;stroke-dashoffset:0}
   }
+  /* WebGL globe layer (progressive enhancement over the SVG globe) */
+  #globeViz{position:absolute;inset:0;opacity:0;transition:opacity .9s ease;z-index:1;cursor:grab}
+  #globeViz:active{cursor:grabbing}
+  .globe-svg{position:relative;z-index:0;transition:opacity .9s ease}
+  .globe-wrap.webgl .globe-svg{opacity:0;pointer-events:none}
+  .globe-glow{z-index:0}
+  .compass{z-index:3}
   .dest{margin-top:6px}
   .dest-eyebrow{font-family:var(--display);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin:0 0 16px}
   .dest-eyebrow .dot{color:var(--orange)}
@@ -148,6 +155,7 @@
      <div class="hero-stage" aria-hidden="true">
       <div class="globe-wrap">
        <div class="globe-glow"></div>
+       <div id="globeViz" aria-hidden="true"></div>
        <svg class="globe-svg" viewBox="0 0 400 400" fill="none">
         <defs>
          <radialGradient id="gSphere" cx="42%" cy="38%" r="72%">
@@ -257,5 +265,85 @@
       &copy; Northern Root · Records &amp; Music Studios · Flight Simulator Studio
     </footer>
   </div>
+
+  <!-- Interactive 3D globe (progressive enhancement; the SVG globe is the fallback) -->
+  <script src="https://unpkg.com/globe.gl"></script>
+  <script>
+  (function () {
+    var el = document.getElementById('globeViz');
+    if (!el || typeof Globe === 'undefined') return;
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var lite = window.matchMedia('(hover: none)').matches || window.innerWidth < 820;
+
+    var PH = { lat: 12.8797, lng: 121.774 };
+    var dests = [
+      { lat: 35.68, lng: 139.69 },   // Tokyo
+      { lat: 1.35, lng: 103.82 },    // Singapore
+      { lat: 25.20, lng: 55.27 },    // Dubai
+      { lat: 51.51, lng: -0.13 },    // London
+      { lat: 40.71, lng: -74.0 },    // New York
+      { lat: 37.77, lng: -122.42 },  // San Francisco
+      { lat: -33.87, lng: 151.21 }   // Sydney
+    ];
+    var arcs = dests.map(function (d) {
+      return { startLat: PH.lat, startLng: PH.lng, endLat: d.lat, endLng: d.lng };
+    });
+    var points = dests.map(function (d) { return { lat: d.lat, lng: d.lng, size: 0.28, color: '#2af5ff' }; });
+    points.push({ lat: PH.lat, lng: PH.lng, size: 0.6, color: '#ffd27a' });
+
+    var world;
+    try { world = Globe()(el); } catch (e) { return; }
+
+    world
+      .backgroundColor('rgba(0,0,0,0)')
+      .showAtmosphere(true).atmosphereColor('#2af5ff').atmosphereAltitude(0.2)
+      .arcsData(arcs)
+        .arcColor(function () { return ['#ff6a1a', '#2af5ff']; })
+        .arcStroke(0.5)
+        .arcAltitudeAutoScale(0.45)
+        .arcDashLength(0.4).arcDashGap(2)
+        .arcDashInitialGap(function () { return 1 + (dests.length % 3); })
+        .arcDashAnimateTime(reduce ? 0 : 2400)
+      .pointsData(points)
+        .pointColor('color').pointAltitude(0.012)
+        .pointRadius('size').pointsMerge(false)
+      .width(el.clientWidth).height(el.clientHeight);
+
+    // Dark, neon-rimmed globe body.
+    try { world.globeMaterial().color.set('#0b1720'); } catch (e) {}
+
+    // Dotted continents (Dribbble-style). Falls back gracefully if the dataset can't load.
+    fetch('https://unpkg.com/three-globe/example/datasets/ne_110m_admin_0_countries.geojson')
+      .then(function (r) { return r.json(); })
+      .then(function (geo) {
+        world
+          .hexPolygonsData(geo.features)
+          .hexPolygonResolution(3)
+          .hexPolygonMargin(0.32)
+          .hexPolygonUseDots(true)
+          .hexPolygonColor(function () { return 'rgba(255,150,70,0.75)'; });
+      })
+      .catch(function () {});
+
+    world.pointOfView({ lat: 14, lng: 128, altitude: 2.4 }, 0);
+
+    var c = world.controls();
+    c.enableZoom = false;
+    c.autoRotate = !reduce;
+    c.autoRotateSpeed = 0.7;
+    c.enableRotate = !lite; // keep vertical scroll usable on touch; still auto-rotates
+    c.enablePan = false;
+
+    function size() { world.width(el.clientWidth).height(el.clientHeight); }
+    window.addEventListener('resize', size);
+
+    world.onGlobeReady(function () {
+      el.style.opacity = 1;
+      var wrap = el.closest('.globe-wrap');
+      if (wrap) wrap.classList.add('webgl');
+    });
+  })();
+  </script>
 </body>
 </html>
