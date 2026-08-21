@@ -104,8 +104,8 @@
   .globe-wrap{position:relative;width:min(440px,84vw);aspect-ratio:1}
   .globe-glow{position:absolute;inset:-24%;border-radius:50%;filter:blur(16px);animation:glowPulse 6s ease-in-out infinite;
     background:
-      radial-gradient(circle at 50% 50%, rgba(255,196,92,.34), rgba(255,140,40,.18) 38%, transparent 68%),
-      radial-gradient(circle at 50% 50%, rgba(42,245,255,.20), transparent 60%)}
+      radial-gradient(circle at 50% 50%, rgba(42,245,255,.30), rgba(42,245,255,.10) 45%, transparent 66%),
+      radial-gradient(circle at 50% 50%, rgba(255,106,26,.10), transparent 46%)}
   @keyframes glowPulse{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
   @media (prefers-reduced-motion:reduce){.globe-glow{animation:none}}
   .globe-svg{position:relative;width:100%;height:100%;display:block}
@@ -290,9 +290,9 @@
 
     world
       .backgroundColor('rgba(0,0,0,0)')
-      .showAtmosphere(true).atmosphereColor('#3ad6ff').atmosphereAltitude(0.34)
+      .showAtmosphere(true).atmosphereColor('#2af5ff').atmosphereAltitude(0.3)
       .arcsData(arcs)
-        .arcColor(function () { return ['#ffcf6a', '#2af5ff']; })
+        .arcColor(function () { return ['#ff6a1a', '#2af5ff']; })
         .arcStroke(0.5)
         .arcAltitudeAutoScale(0.45)
         .arcDashLength(0.4).arcDashGap(2)
@@ -315,7 +315,7 @@
           .hexPolygonResolution(3)
           .hexPolygonMargin(0.32)
           .hexPolygonUseDots(true)
-          .hexPolygonColor(function () { return 'rgba(255,198,98,0.92)'; });
+          .hexPolygonColor(function () { return 'rgba(255,110,34,0.82)'; });
       })
       .catch(function () {});
 
