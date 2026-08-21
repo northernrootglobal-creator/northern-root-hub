@@ -102,8 +102,12 @@
   .hero-stage{position:relative;z-index:1;display:grid;place-items:center;min-height:340px}
   @media (max-width:820px){.hero-stage{order:1;min-height:300px;margin-bottom:4px}}
   .globe-wrap{position:relative;width:min(440px,84vw);aspect-ratio:1}
-  .globe-glow{position:absolute;inset:-14%;border-radius:50%;filter:blur(8px);
-    background:radial-gradient(circle at 50% 50%, rgba(42,245,255,.22), rgba(255,106,26,.12) 42%, transparent 66%)}
+  .globe-glow{position:absolute;inset:-24%;border-radius:50%;filter:blur(16px);animation:glowPulse 6s ease-in-out infinite;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(255,196,92,.34), rgba(255,140,40,.18) 38%, transparent 68%),
+      radial-gradient(circle at 50% 50%, rgba(42,245,255,.20), transparent 60%)}
+  @keyframes glowPulse{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+  @media (prefers-reduced-motion:reduce){.globe-glow{animation:none}}
   .globe-svg{position:relative;width:100%;height:100%;display:block}
   .spin{transform-origin:200px 200px;animation:spin 46s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
@@ -143,9 +147,8 @@
      <div class="starfield" aria-hidden="true"></div>
      <div class="hero-copy">
       <img class="mark" alt="Northern Root" src="/nr-logo.png" />
-      <p class="eyebrow">Northern Root Worldwide · Northern Heart, Global Pulse</p>
+      <p class="eyebrow">Northern Root</p>
       <h1 class="word">Know Your <span>True North</span></h1>
-      <p class="sub">From the Philippines to the world — one purpose-driven global brand, sending its pulse across the map.</p>
       <div class="cta">
         <a class="btn btn-primary" href="#destinations">Explore Northern Root</a>
       </div>
@@ -193,15 +196,6 @@
         </g>
         <circle class="ph-pulse" cx="250" cy="232" r="4" fill="url(#gPh)"/>
         <circle cx="250" cy="232" r="5" fill="#ffd27a"/>
-       </svg>
-       <svg class="compass" viewBox="0 0 74 74" fill="none">
-        <circle cx="37" cy="37" r="34" stroke="rgba(255,255,255,.18)" stroke-width="1.4"/>
-        <circle cx="37" cy="37" r="27" stroke="rgba(42,245,255,.25)" stroke-width="1"/>
-        <g class="needle">
-         <path d="M37 12 L43 37 L37 33 L31 37 Z" fill="#ff6a1a"/>
-         <path d="M37 62 L31 37 L37 41 L43 37 Z" fill="rgba(255,255,255,.55)"/>
-        </g>
-        <text x="37" y="10" text-anchor="middle" font-size="9" fill="#ffd27a" font-family="sans-serif" font-weight="700">N</text>
        </svg>
       </div>
      </div>
@@ -296,9 +290,9 @@
 
     world
       .backgroundColor('rgba(0,0,0,0)')
-      .showAtmosphere(true).atmosphereColor('#2af5ff').atmosphereAltitude(0.2)
+      .showAtmosphere(true).atmosphereColor('#3ad6ff').atmosphereAltitude(0.34)
       .arcsData(arcs)
-        .arcColor(function () { return ['#ff6a1a', '#2af5ff']; })
+        .arcColor(function () { return ['#ffcf6a', '#2af5ff']; })
         .arcStroke(0.5)
         .arcAltitudeAutoScale(0.45)
         .arcDashLength(0.4).arcDashGap(2)
@@ -321,7 +315,7 @@
           .hexPolygonResolution(3)
           .hexPolygonMargin(0.32)
           .hexPolygonUseDots(true)
-          .hexPolygonColor(function () { return 'rgba(255,150,70,0.75)'; });
+          .hexPolygonColor(function () { return 'rgba(255,198,98,0.92)'; });
       })
       .catch(function () {});
 
